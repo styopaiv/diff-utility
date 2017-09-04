@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import printInfo from '..';
+import generateDiff from '..';
 
-printInfo();
+generateDiff();

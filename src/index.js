@@ -1,8 +1,9 @@
 import commander from 'commander';
+import pjson from '../package.json';
 
 const program = commander
-  .version('0.1.0')
-  .description('Compares two configuration files and shows a difference.')
+  .version(pjson.version)
+  .description(pjson.description)
   .arguments('<firstConfig> <secondConfig>')
   .option('-f, --format [type]', 'output format');
 
