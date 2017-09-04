@@ -7,5 +7,4 @@ const program = commander
   .arguments('<firstConfig> <secondConfig>')
   .option('-f, --format [type]', 'output format');
 
-
 export default () => program.parse(process.argv);
