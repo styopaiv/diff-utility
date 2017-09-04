@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import printHelp from '..';
+import printInfo from '..';
 
-printHelp();
+printInfo();
