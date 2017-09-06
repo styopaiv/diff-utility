@@ -1,6 +1,6 @@
 {
   "name": "diff-ivstyopa",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Compares two configuration files and shows a difference.",
   "main": "index.js",
   "repository": {
@@ -8,8 +8,7 @@
     "url": "https://github.com/xibalbaroad/project-lvl2-s121"
   },
   "bin": {
-    "gendiff": "dist/bin/gendiff.js",
-    "compare": "dist/bin/compare.js"
+    "gendiff": "dist/bin/gendiff.js"
   },
   "scripts": {
     "babel-node": "babel-node",

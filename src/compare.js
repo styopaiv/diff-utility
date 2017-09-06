@@ -1,45 +1,30 @@
-import fs from 'fs';
-import path from 'path';
 import _ from 'lodash';
-import yaml from 'js-yaml';
+import parseConfig from './parseConfig';
+import readFiles from './readFiles';
 
 export default (firstPath, secondPath) => {
-  const firstFile = fs.readFileSync(firstPath);
-  const secondFile = fs.readFileSync(secondPath);
-
-  const extension = path.extname(firstPath);
-
-  let beforeObj;
-  let afterObj;
-
-  if (extension === '.json') {
-    beforeObj = JSON.parse(firstFile);
-    afterObj = JSON.parse(secondFile);
-  } else if (extension === '.yml') {
-    beforeObj = yaml.load(fs.readFileSync(firstPath, { encoding: 'utf-8' }));
-    afterObj = yaml.load(fs.readFileSync(secondPath, { encoding: 'utf-8' }));
-  }
+  const [firstFile, secondFile] = readFiles(firstPath, secondPath);
+  const [beforeObj, afterObj] = parseConfig(firstPath, firstFile, secondFile);
 
   const beforeKeys = Object.keys(beforeObj);
   const afterKeys = Object.keys(afterObj);
-  const combinedKeys = _.uniq(beforeKeys.concat(afterKeys));
+  const combinedKeys = _.union(beforeKeys, afterKeys);
 
   const result = combinedKeys.reduce((acc, elem) => {
     const includesBefore = beforeKeys.includes(elem);
     const includesAfter = afterKeys.includes(elem);
 
     if (includesBefore && includesAfter && beforeObj[elem] === afterObj[elem]) {
-      acc.push(`    ${elem}: ${beforeObj[elem]}`);
+      return acc.concat(`    ${elem}: ${beforeObj[elem]}`);
     }
     if (includesBefore && !includesAfter) {
-      acc.push(`  - ${elem}: ${beforeObj[elem]}`);
+      return acc.concat(`  - ${elem}: ${beforeObj[elem]}`);
     }
     if (!includesBefore && includesAfter) {
-      acc.push(`  + ${elem}: ${afterObj[elem]}`);
+      return acc.concat(`  + ${elem}: ${afterObj[elem]}`);
     }
     if (includesBefore && includesAfter && beforeObj[elem] !== afterObj[elem]) {
-      acc.push(`  + ${elem}: ${afterObj[elem]}`);
-      acc.push(`  - ${elem}: ${beforeObj[elem]}`);
+      return acc.concat(`  + ${elem}: ${afterObj[elem]}`, `  - ${elem}: ${beforeObj[elem]}`);
     }
     return acc;
   }, []).join('\n');
