@@ -1,12 +1,24 @@
 import fs from 'fs';
+import path from 'path';
 import _ from 'lodash';
+import yaml from 'js-yaml';
 
 export default (firstPath, secondPath) => {
   const firstFile = fs.readFileSync(firstPath);
   const secondFile = fs.readFileSync(secondPath);
 
-  const beforeObj = JSON.parse(firstFile);
-  const afterObj = JSON.parse(secondFile);
+  const extension = path.extname(firstPath);
+
+  let beforeObj;
+  let afterObj;
+
+  if (extension === '.json') {
+    beforeObj = JSON.parse(firstFile);
+    afterObj = JSON.parse(secondFile);
+  } else if (extension === '.yml') {
+    beforeObj = yaml.load(fs.readFileSync(firstPath, { encoding: 'utf-8' }));
+    afterObj = yaml.load(fs.readFileSync(secondPath, { encoding: 'utf-8' }));
+  }
 
   const beforeKeys = Object.keys(beforeObj);
   const afterKeys = Object.keys(afterObj);

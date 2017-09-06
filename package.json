@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "commander": "*",
+    "js-yaml": "^3.9.1",
     "lodash": "*"
   }
 }
