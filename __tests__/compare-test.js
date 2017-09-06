@@ -20,3 +20,9 @@ test('compares yaml', () => {
   const secondPath = './files/yml/after.yml';
   expect(compare(firstPath, secondPath)).toBe(result);
 });
+
+test('compares ini', () => {
+  const firstPath = './files/ini/before.ini';
+  const secondPath = './files/ini/after.ini';
+  expect(compare(firstPath, secondPath)).toBe(result);
+});
