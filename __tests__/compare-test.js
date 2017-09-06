@@ -1,10 +1,10 @@
-import fs from 'fs';
 import compare from '../src/compare';
 
-const firstFile = fs.readFileSync('./files/first.json');
-const secondFile = fs.readFileSync('./files/second.json');
+const firstPath = './files/before.json';
+const secondPath = './files/after.json';
 
-const result = `{
+const result = `
+{
     host: hexlet.io
   + timeout: 20
   - timeout: 50
@@ -13,5 +13,5 @@ const result = `{
 }`;
 
 test('compares files', () => {
-  expect(compare(firstFile, secondFile)).toBe(result);
+  expect(compare(firstPath, secondPath)).toBe(result);
 });

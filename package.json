@@ -8,7 +8,8 @@
     "url": "https://github.com/xibalbaroad/project-lvl2-s121"
   },
   "bin": {
-    "gendiff": "dist/bin/gendiff.js"
+    "gendiff": "dist/bin/gendiff.js",
+    "compare": "dist/bin/compare.js"
   },
   "scripts": {
     "babel-node": "babel-node",

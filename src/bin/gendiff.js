@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import generateDiff from '..';
+import genDiff from '..';
 
-generateDiff();
+genDiff();
