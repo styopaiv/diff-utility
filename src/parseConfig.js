@@ -1,22 +1,27 @@
-import path from 'path';
+import _ from 'lodash';
 import yaml from 'js-yaml';
 import ini from 'ini';
+import compare from './compare';
 
-export default (filePath, firstFile, secondFile) => {
-  const extension = path.extname(filePath);
+export default (extension, firstFile, secondFile) => {
+  const parseOptions = [
+    {
+      ext: '.json',
+      parse: filePath => JSON.parse(filePath),
+    },
+    {
+      ext: '.yml',
+      parse: filePath => yaml.load(filePath),
+    },
+    {
+      ext: '.ini',
+      parse: filePath => ini.parse(filePath),
+    },
+  ];
 
-  let beforeObj;
-  let afterObj;
+  const option = _.find(parseOptions, obj => obj.ext === extension);
+  const beforeObj = option.parse(firstFile);
+  const afterObj = option.parse(secondFile);
 
-  if (extension === '.json') {
-    beforeObj = JSON.parse(firstFile);
-    afterObj = JSON.parse(secondFile);
-  } else if (extension === '.yml') {
-    beforeObj = yaml.load(firstFile);
-    afterObj = yaml.load(secondFile);
-  } else if (extension === '.ini') {
-    beforeObj = ini.parse(firstFile);
-    afterObj = ini.parse(secondFile);
-  }
-  return [beforeObj, afterObj];
+  return compare(beforeObj, afterObj);
 };

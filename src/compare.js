@@ -1,11 +1,6 @@
 import _ from 'lodash';
-import parseConfig from './parseConfig';
-import readFiles from './readFiles';
 
-export default (firstPath, secondPath) => {
-  const [firstFile, secondFile] = readFiles(firstPath, secondPath);
-  const [beforeObj, afterObj] = parseConfig(firstPath, firstFile, secondFile);
-
+export default (beforeObj, afterObj) => {
   const beforeKeys = Object.keys(beforeObj);
   const afterKeys = Object.keys(afterObj);
   const combinedKeys = _.union(beforeKeys, afterKeys);
