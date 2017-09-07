@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import genDiff from '..';
+import run from '../runCommander';
 
-genDiff();
+run();

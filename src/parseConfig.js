@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import yaml from 'js-yaml';
 import ini from 'ini';
-import compare from './compare';
+import compare from './index';
 
 export default (extension, firstFile, secondFile) => {
   const parseOptions = [

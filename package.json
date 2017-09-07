@@ -2,7 +2,7 @@
   "name": "diff-ivstyopa",
   "version": "1.0.5",
   "description": "Compares two configuration files and shows a difference.",
-  "main": "readFiles.js",
+  "main": "genDiff.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/xibalbaroad/project-lvl2-s121"

@@ -1,4 +1,4 @@
-import readFiles from '../src/readFiles';
+import genDiff from '../src/genDiff';
 
 const result = `
 {
@@ -12,17 +12,17 @@ const result = `
 test('compares json', () => {
   const firstPath = './__tests__/__fixtures__/json/before.json';
   const secondPath = './__tests__/__fixtures__/json/after.json';
-  expect(readFiles(firstPath, secondPath)).toBe(result);
+  expect(genDiff(firstPath, secondPath)).toBe(result);
 });
 
 test('compares yaml', () => {
   const firstPath = './__tests__/__fixtures__/yml/before.yml';
   const secondPath = './__tests__/__fixtures__/yml/after.yml';
-  expect(readFiles(firstPath, secondPath)).toBe(result);
+  expect(genDiff(firstPath, secondPath)).toBe(result);
 });
 
 test('compares ini', () => {
   const firstPath = './__tests__/__fixtures__/ini/before.ini';
   const secondPath = './__tests__/__fixtures__/ini/after.ini';
-  expect(readFiles(firstPath, secondPath)).toBe(result);
+  expect(genDiff(firstPath, secondPath)).toBe(result);
 });

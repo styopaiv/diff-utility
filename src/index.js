@@ -1,15 +1,30 @@
-import commander from 'commander';
-import pjson from '../package.json';
-import readFiles from './readFiles';
+import _ from 'lodash';
 
-const program = commander
-  .version(pjson.version)
-  .description(pjson.description)
-  .arguments('<firstConfig> <secondConfig>')
-  .action((firstConfig, secondConfig) => {
-    const diff = readFiles(firstConfig, secondConfig);
-    console.log(diff);
-  })
-  .option('-f, --format [type]', 'output format');
+export default (beforeObj, afterObj) => {
+  const beforeKeys = Object.keys(beforeObj);
+  const afterKeys = Object.keys(afterObj);
+  const combinedKeys = _.union(beforeKeys, afterKeys);
 
-export default () => program.parse(process.argv);
+  const result = combinedKeys.reduce((acc, elem) => {
+    const includesBefore = beforeKeys.includes(elem);
+    const includesAfter = afterKeys.includes(elem);
+
+    if (includesBefore && includesAfter && beforeObj[elem] === afterObj[elem]) {
+      return acc.concat(`    ${elem}: ${beforeObj[elem]}`);
+    }
+    if (includesBefore && !includesAfter) {
+      return acc.concat(`  - ${elem}: ${beforeObj[elem]}`);
+    }
+    if (!includesBefore && includesAfter) {
+      return acc.concat(`  + ${elem}: ${afterObj[elem]}`);
+    }
+    if (includesBefore && includesAfter && beforeObj[elem] !== afterObj[elem]) {
+      return acc.concat(`  + ${elem}: ${afterObj[elem]}`, `  - ${elem}: ${beforeObj[elem]}`);
+    }
+    return acc;
+  }, []).join('\n');
+  return `
+{
+${result}
+}`;
+};
