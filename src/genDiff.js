@@ -1,8 +1,14 @@
+import fs from 'fs';
+import path from 'path';
 import parseConfig from './parseConfig';
-import readFiles from './readFiles';
+import compare from './index';
 
 export default (firstPath, secondPath) => {
-  const [extension, firstFile, secondFile] = readFiles(firstPath, secondPath);
+  const firstFile = fs.readFileSync(firstPath, 'utf-8');
+  const secondFile = fs.readFileSync(secondPath, 'utf-8');
+  const extension = path.extname(firstPath);
+  const beforeObj = parseConfig(extension, firstFile);
+  const afterObj = parseConfig(extension, secondFile);
 
-  return parseConfig(extension, firstFile, secondFile);
+  return compare(beforeObj, afterObj);
 };
