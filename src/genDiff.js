@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import parseConfig from './parseConfig';
 import compare from './index';
-// import getAst from './getAst';
 
 export default (firstPath, secondPath) => {
   const firstFile = fs.readFileSync(firstPath, 'utf-8');
