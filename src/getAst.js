@@ -7,7 +7,7 @@ const getAst = (beforeObj, afterObj) => {
 
   const types = [
     {
-      type: 'parent',
+      type: 'nested',
       check: arg => _.isObject(beforeObj[arg]) && _.isObject(afterObj[arg]),
     },
     {
@@ -39,13 +39,10 @@ const getAst = (beforeObj, afterObj) => {
     const valueBefore = beforeObj[key];
     const valueAfter = afterObj[key];
 
-    if (type === 'parent') {
-      return acc.concat({
-        key, type, valueBefore, valueAfter, children: getAst(beforeObj[key], afterObj[key]),
-      });
-    }
+    const children = type === 'nested' ? getAst(beforeObj[key], afterObj[key]) : [];
+
     return acc.concat({
-      key, type, valueBefore, valueAfter, children: [],
+      key, type, valueBefore, valueAfter, children,
     });
   }, []);
   return result;

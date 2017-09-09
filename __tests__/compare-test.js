@@ -1,4 +1,4 @@
-import genDiff from '../src/genDiff';
+import genDiff from '../src';
 
 const result = `
 {
@@ -7,7 +7,8 @@ const result = `
   - timeout: 50
   - proxy: 123.234.53.22
   + verbose: true
-}`;
+}
+`;
 
 const treeResult = `
 {
@@ -26,7 +27,8 @@ const treeResult = `
     }
   - group2: { abc: 12345 }
   + group3: { fee: 100500 }
-}`;
+}
+`;
 
 test('compares json', () => {
   const firstPath = './__tests__/__fixtures__/json/before.json';
