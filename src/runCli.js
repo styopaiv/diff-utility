@@ -1,6 +1,6 @@
 import commander from 'commander';
 import pjson from '../package.json';
-import genDiff from './index';
+import genDiff from '.';
 
 const program = commander
   .version(pjson.version)

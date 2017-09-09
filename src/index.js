@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import getAst from './getAst';
+import buildAst from './buildAst';
 import parseConfig from './parseConfig';
 import render from './render';
 
@@ -10,7 +10,7 @@ export default (firstPath, secondPath) => {
   const extension = path.extname(firstPath);
   const beforeObj = parseConfig(extension, firstFile);
   const afterObj = parseConfig(extension, secondFile);
-  const ast = getAst(beforeObj, afterObj);
+  const ast = buildAst(beforeObj, afterObj);
 
   return render(ast);
 };

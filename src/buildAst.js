@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const getAst = (beforeObj, afterObj) => {
+const buildAst = (beforeObj, afterObj) => {
   const beforeKeys = Object.keys(beforeObj);
   const afterKeys = Object.keys(afterObj);
   const combinedKeys = _.union(beforeKeys, afterKeys);
@@ -39,7 +39,7 @@ const getAst = (beforeObj, afterObj) => {
     const valueBefore = beforeObj[key];
     const valueAfter = afterObj[key];
 
-    const children = type === 'nested' ? getAst(beforeObj[key], afterObj[key]) : [];
+    const children = type === 'nested' ? buildAst(beforeObj[key], afterObj[key]) : [];
 
     return acc.concat({
       key, type, valueBefore, valueAfter, children,
@@ -48,4 +48,4 @@ const getAst = (beforeObj, afterObj) => {
   return result;
 };
 
-export default getAst;
+export default buildAst;
