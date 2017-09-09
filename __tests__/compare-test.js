@@ -15,25 +15,17 @@ const treeResult = `
         setting1: Value 1
       - setting2: 200
         setting3: true
-      - setting6: {
-            key: value
-        }
+      - setting6: { key: value }
       + setting4: blah blah
-      + setting5: {
-            key5: value5
-        }
+      + setting5: { key5: value5 }
     }
     group1: {
       + baz: bars
       - baz: bas
         foo: bar
     }
-  - group2: {
-        abc: 12345
-    }
-  + group3: {
-        fee: 100500
-    }
+  - group2: { abc: 12345 }
+  + group3: { fee: 100500 }
 }`;
 
 test('compares json', () => {
@@ -54,8 +46,20 @@ test('compares ini', () => {
   expect(genDiff(firstPath, secondPath)).toBe(result);
 });
 
-test('compares tree json', () => {
+test('compares nested json', () => {
   const firstPath = './__tests__/__fixtures__/json/treeBefore.json';
   const secondPath = './__tests__/__fixtures__/json/treeAfter.json';
+  expect(genDiff(firstPath, secondPath)).toBe(treeResult);
+});
+
+test('compares nested yaml', () => {
+  const firstPath = './__tests__/__fixtures__/yml/treeBefore.yml';
+  const secondPath = './__tests__/__fixtures__/yml/treeAfter.yml';
+  expect(genDiff(firstPath, secondPath)).toBe(treeResult);
+});
+
+test('compares nested ini', () => {
+  const firstPath = './__tests__/__fixtures__/ini/treeBefore.ini';
+  const secondPath = './__tests__/__fixtures__/ini/treeAfter.ini';
   expect(genDiff(firstPath, secondPath)).toBe(treeResult);
 });
