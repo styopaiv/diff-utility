@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import run from '../runCommander';
+import run from '../runCli';
 
 run();
