@@ -39,7 +39,7 @@ const buildAst = (beforeObj, afterObj) => {
     const valueBefore = beforeObj[key];
     const valueAfter = afterObj[key];
 
-    const children = type === 'nested' ? buildAst(beforeObj[key], afterObj[key]) : [];
+    const children = type === 'nested' ? buildAst(valueBefore, valueAfter) : [];
 
     return acc.concat({
       key, type, valueBefore, valueAfter, children,
