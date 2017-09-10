@@ -38,6 +38,42 @@ const treeResult = `
 }
 `;
 
+const deepResult = `
+{
+    common: {
+        setting1: Value 1
+      - setting2: 200
+        setting3: true
+      - setting6: {
+            key: value
+        }
+        setting7: {
+          - qwert: {
+                newKey: value
+            }
+          + key: {
+                newKey: new value
+            }
+    }
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+    }
+    group1: {
+      + baz: bars
+      - baz: bas
+        foo: bar
+    }
+  - group2: {
+        abc: 12345
+    }
+  + group3: {
+        fee: 100500
+    }
+}
+`;
+
 test('compares simple json', () => {
   const firstPath = './__tests__/__fixtures__/json/before.json';
   const secondPath = './__tests__/__fixtures__/json/after.json';
@@ -59,7 +95,7 @@ test('compares simple ini', () => {
 test('compares nested json', () => {
   const firstPath = './__tests__/__fixtures__/json/treeBefore.json';
   const secondPath = './__tests__/__fixtures__/json/treeAfter.json';
-  expect(genDiff(firstPath, secondPath, 'string')).toBe(treeResult);
+  expect(genDiff(firstPath, secondPath, 'string')).toBe(deepResult);
 });
 
 test('compares nested yaml', () => {

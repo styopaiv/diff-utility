@@ -5,9 +5,13 @@
     "setting4": "blah blah",
     "setting5": {
       "key5": "value5"
+    },
+    "setting7": {
+      "key": {
+        "newKey": "new value"
+      }
     }
   },
-
   "group1": {
     "foo": "bar",
     "baz": "bars"

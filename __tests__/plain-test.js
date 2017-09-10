@@ -9,6 +9,8 @@ const treeResult = `Property 'common.setting1' didn't change.
 Property 'common.setting2' was removed
 Property 'common.setting3' didn't change.
 Property 'common.setting6' was removed
+Property 'common.setting7.qwert' was removed
+Property 'common.setting7.key' was added with complex value
 Property 'common.setting4' was added with value: blah blah
 Property 'common.setting5' was added with complex value
 Property 'group1.baz' was updated. From 'bas' to 'bars'

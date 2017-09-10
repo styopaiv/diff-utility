@@ -1,5 +1,5 @@
-import renderToPlain from './formats/plain';
-import renderToString from './formats/string';
+import renderToString from './renderToString';
+import renderToPlain from './renderToPlain';
 
 export default (ast, format) => {
   const formats = {

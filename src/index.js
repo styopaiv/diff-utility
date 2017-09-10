@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import buildAst from './buildAst';
 import parseConfig from './parseConfig';
-import render from './render';
+import render from './renders/';
 
 export default (firstPath, secondPath, format) => {
   const firstFile = fs.readFileSync(firstPath, 'utf-8');
