@@ -1,8 +1,8 @@
 ## Compares two configuration files and shows a difference.
-### Supports:
+### Supports
    json, yaml, ini
 
-**Installation:**
+**Installation**
 ```
 $ npm i diff-ivstyopa
 ```
