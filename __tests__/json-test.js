@@ -1,6 +1,6 @@
 import genDiff from '../src';
 
-const result = `{
+const result = `[
   {
     "key": "host",
     "type": "unchanged",
@@ -27,7 +27,7 @@ const result = `{
     "valueAfter": "true",
     "children": []
   }
-}`;
+]`;
 
 test('compares simple json', () => {
   const firstPath = './__tests__/__fixtures__/json/before.json';
