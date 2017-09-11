@@ -11,7 +11,7 @@ const buildAst = (beforeObj, afterObj) => {
       check: arg => _.isObject(beforeObj[arg]) && _.isObject(afterObj[arg]),
     },
     {
-      type: 'same',
+      type: 'unchanged',
       check: arg => _.has(beforeObj, arg)
       && _.has(afterObj, arg)
       && beforeObj[arg] === afterObj[arg],

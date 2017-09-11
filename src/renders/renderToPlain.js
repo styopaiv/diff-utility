@@ -5,34 +5,35 @@ const checkValue = (value) => {
   return str;
 };
 
-const getKey = (item, elemKey) => {
-  const key = elemKey !== '' ? `${elemKey}.${item.key}` : item.key;
-  return key;
-};
-
-const checkType = (elemType, elem, nestedKey, children) => {
+const checkType = (elemType, elem, children, path) => {
   const types = {
     nested: () => `${children}`,
 
-    same: arg => `Property '${getKey(arg, nestedKey)}' didn't change.`,
+    unchanged: () => '',
 
-    changed: arg => `Property '${getKey(arg, nestedKey)}' was updated. From '${arg.valueBefore}' to '${arg.valueAfter}'`,
+    changed: arg => `Property '${path.join('.')}' was updated. From '${arg.valueBefore}' to '${arg.valueAfter}'`,
 
-    added: arg => `Property '${getKey(arg, nestedKey)}' was added with ${checkValue(arg.valueAfter)}`,
+    added: arg => `Property '${path.join('.')}' was added with ${checkValue(arg.valueAfter)}`,
 
-    deleted: arg => `Property '${getKey(arg, nestedKey)}' was removed`,
+    deleted: () => `Property '${path.join('.')}' was removed`,
   };
   return types[elemType](elem);
 };
 
+const getPath = (arg, arr) => {
+  const key = arg.type === 'nested' ? arr.concat(arg.key) : [].concat(arr, arg.key);
+  return key;
+};
+
 export default (ast) => {
-  const iter = (obj, nestedKey) => {
+  const iter = (obj, keysArr) => {
     const result = obj.reduce((acc, elem) => {
-      const children = iter(elem.children, elem.key);
-      return acc.concat(checkType(elem.type, elem, nestedKey, children));
+      const path = getPath(elem, keysArr);
+      const children = iter(elem.children, path);
+      return acc.concat(checkType(elem.type, elem, children, path));
     }, []).join('\n');
 
-    return result;
+    return result.replace(/^\s*$[\n\r]{1,}/gm, '');
   };
-  return iter(ast, '');
+  return iter(ast, []);
 };

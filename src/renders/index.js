@@ -1,10 +1,11 @@
 import renderToString from './renderToString';
 import renderToPlain from './renderToPlain';
+import renderToJson from './renderToJson';
 
-export default (ast, format) => {
-  const formats = {
-    string: renderToString,
-    plain: renderToPlain,
-  };
-  return formats[format](ast);
+const formats = {
+  string: renderToString,
+  plain: renderToPlain,
+  json: renderToJson,
 };
+
+export default (ast, format) => formats[format](ast);

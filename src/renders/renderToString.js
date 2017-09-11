@@ -18,7 +18,7 @@ const checkType = (elem, elemType, indent, children) => {
 ${children}
     }`,
 
-    same: arg => `${indent}${space} ${arg.key}: ${convertStr(arg.valueBefore, indent)}`,
+    unchanged: arg => `${indent}${space} ${arg.key}: ${convertStr(arg.valueBefore, indent)}`,
 
     changed: arg => [`${indent}${addSign} ${arg.key}: ${convertStr(arg.valueAfter, indent)}`,
       `${indent}${deleteSign} ${arg.key}: ${convertStr(arg.valueBefore)}`],
