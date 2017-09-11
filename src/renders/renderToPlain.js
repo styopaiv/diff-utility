@@ -29,11 +29,10 @@ export default (ast) => {
   const iter = (obj, keysArr) => {
     const result = obj.reduce((acc, elem) => {
       const path = getPath(elem, keysArr);
-      const children = iter(elem.children, path);
+      const children = elem.type === 'nested' ? iter(elem.children, path) : '';
       return acc.concat(checkType(elem.type, elem, children, path));
-    }, []).join('\n');
-
-    return result.replace(/^\s*$[\n\r]{1,}/gm, '');
+    }, []).filter(item => item !== '').join('\n');
+    return result;
   };
   return iter(ast, []);
 };

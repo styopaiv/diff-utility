@@ -34,7 +34,7 @@ export default (ast) => {
   const iter = (obj, counter) => {
     const indent = '  '.repeat(counter);
     const result = obj.reduce((acc, elem) => {
-      const children = iter(elem.children, counter + 2);
+      const children = elem.type === 'nested' ? iter(elem.children, counter + 2) : '';
       return acc.concat(checkType(elem, elem.type, indent, children));
     }, []).join('\n');
     return result;

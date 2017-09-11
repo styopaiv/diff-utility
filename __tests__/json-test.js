@@ -1,26 +1,30 @@
 import genDiff from '../src';
 
 const result = `{
-  "host": {
+  {
+    "key": "host",
     "type": "unchanged",
     "valueBefore": "hexlet.io",
-    "ValueAfter": "hexlet.io",
+    "valueAfter": "hexlet.io",
     "children": []
   },
-  "timeout": {
+  {
+    "key": "timeout",
     "type": "changed",
     "valueBefore": "50",
-    "ValueAfter": "20",
+    "valueAfter": "20",
     "children": []
   },
-  "proxy": {
+  {
+    "key": "proxy",
     "type": "deleted",
     "valueBefore": "123.234.53.22",
     "children": []
   },
-  "verbose": {
+  {
+    "key": "verbose",
     "type": "added",
-    "ValueAfter": "true",
+    "valueAfter": "true",
     "children": []
   }
 }`;
