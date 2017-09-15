@@ -19,5 +19,5 @@ Options:
   -h, --help           output usage information
 ```
 
-[![Build Status](https://travis-ci.org/xibalbaroad/project-lvl2-s121.svg?branch=master)](https://travis-ci.org/xibalbaroad/project-lvl2-s121)
+[![Build Status](https://travis-ci.org/xibalbaroad/diff-utility.svg?branch=master)](https://travis-ci.org/xibalbaroad/diff-utility)
 
